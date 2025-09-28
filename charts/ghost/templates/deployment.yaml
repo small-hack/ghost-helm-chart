@@ -40,6 +40,75 @@ spec:
           {{- end }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{ if or (not .Values.externalDatabase.existingSecret) (not .Values.ghost.smtp.existingSecret) }}
+          envFrom:
+            {{ with .Values.externalDatabase.existingSecret }}
+            - secretRef:
+                name: {{ . }}
+            {{- end }}
+            {{ with .Values.ghost.smtp.existingSecret }}
+            - secretRef:
+                name: {{ . }}
+            {{- end }}
+          {{- end }}
+          {{ if or .Values.externalDatabase.existingSecret .Values.ghost.smtp.existingSecret }}
+          env:
+            {{ if .Values.externalDatabase.existingSecret }}
+            - name: database__connection__host
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.externalDatabase.existingSecret }}
+                  key: {{ .Values.externalDatabase.secretKeys.hostname }}
+            - name: database__connection__port
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.externalDatabase.existingSecret }}
+                  key: {{ .Values.externalDatabase.secretKeys.port }}
+            - name: database__connection__database
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.externalDatabase.existingSecret }}
+                  key: {{ .Values.externalDatabase.secretKeys.database }}
+            - name: database__connection__user
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.externalDatabase.existingSecret }}
+                  key: {{ .Values.externalDatabase.secretKeys.username }}
+            - name: database__connection__password
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.externalDatabase.existingSecret }}
+                  key: {{ .Values.externalDatabase.secretKeys.password }}
+            {{ end }}
+            {{ if .Values.ghost.smtp.existingSecret }}
+            - name: mail__options__host
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.externalDatabase.existingSecret }}
+                  key: {{ .Values.externalDatabase.secretKeys.hostname }}
+            - name: mail__options__port
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.externalDatabase.existingSecret }}
+                  key: {{ .Values.externalDatabase.secretKeys.port }}
+            - name: mail__transport
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.externalDatabase.existingSecret }}
+                  key: {{ .Values.externalDatabase.secretKeys.protocol }}
+            - name: mail__options__auth__user
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.externalDatabase.existingSecret }}
+                  key: {{ .Values.externalDatabase.secretKeys.username }}
+            - name: mail__options__auth__pass
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.externalDatabase.existingSecret }}
+                  key: {{ .Values.externalDatabase.secretKeys.password }}
+            {{ end }}
+          {{- end }}
+
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
