@@ -176,7 +176,7 @@ externalDatabase:
     database: ""
 
 ghost:
-  # -- public url of the ghost blog
+  # -- public url of the ghost blog (must include http:// or https://)
   url: ""
 
   # -- title of your ghost blog

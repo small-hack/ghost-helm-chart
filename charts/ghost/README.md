@@ -1,6 +1,6 @@
 # ghost
 
-![Version: 1.0.4](https://img.shields.io/badge/Version-1.0.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
+![Version: 1.0.5](https://img.shields.io/badge/Version-1.0.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
 
 A Helm chart for deploying Ghost on Kubernetes
 
@@ -55,7 +55,7 @@ A Helm chart for deploying Ghost on Kubernetes
 | ghost.smtp.secretKeys.protocol | string | `""` | Key in existing Kubernetes Secret with the smtp protocol. |
 | ghost.smtp.secretKeys.username | string | `""` | Key in existing Kubernetes Secret with the smtp username. |
 | ghost.smtp.username | string | `""` | smtp username. ignored if existingSecret not "" |
-| ghost.url | string | `""` | public url of the ghost blog |
+| ghost.url | string | `""` | public url of the ghost blog (must include http:// or https://) |
 | image.pullPolicy | string | `"IfNotPresent"` | This sets the pull policy for images. |
 | image.repository | string | `"ghost"` | image repo |
 | image.tag | string | `""` |  |
