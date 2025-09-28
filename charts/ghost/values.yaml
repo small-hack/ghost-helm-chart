@@ -137,6 +137,8 @@ externalDatabase:
   username: ""
   # -- database password. ignored if existingSecret not ""
   password: ""
+  # -- database root password. ignored if existingSecret not ""
+  root_password: ""
   # -- existing kubernetes secret for your external Database
   existingSecret: ""
   secretKeys:
@@ -148,6 +150,8 @@ externalDatabase:
     username: ""
     # -- secret key in your existing k8s secret for the database password
     password: ""
+    # -- secret key in your existing k8s secret for the database root password
+    root_password: ""
     # -- secret key in your existing k8s secret for the database name
     database: ""
 

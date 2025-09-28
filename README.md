@@ -2,4 +2,8 @@ Yet another [ghost](https://ghost.org/) helm chart. This one is licensed AGPL 3 
 
 We deploy:
 
-- deployment for ghost docker container
+- Deployment for [ghost](https://hub.docker.com/_/ghost) docker image
+- Secrets:
+  - database credentials
+  - smtp credentials
+  - admin credentials (these don't do anything yet, but you can set them for your own automation)

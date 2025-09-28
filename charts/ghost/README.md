@@ -10,12 +10,42 @@ A Helm chart for deploying Ghost on Kubernetes
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
 | autoscaling | object | `{"enabled":false,"maxReplicas":100,"minReplicas":1,"targetCPUUtilizationPercentage":80}` | This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/ |
+| externalDatabase.database | string | `""` | database name. ignored if existingSecret not "" |
+| externalDatabase.existingSecret | string | `""` | existing kubernetes secret for your external Database |
+| externalDatabase.host | string | `""` | database hostname. ignored if existingSecret not "" |
+| externalDatabase.password | string | `""` | database password. ignored if existingSecret not "" |
+| externalDatabase.port | string | `""` | database port. ignored if existingSecret not "" |
+| externalDatabase.root_password | string | `""` | database root password. ignored if existingSecret not "" |
+| externalDatabase.secretKeys.database | string | `""` | secret key in your existing k8s secret for the database name |
 | externalDatabase.secretKeys.hostname | string | `""` | secret key in your existing k8s secret for the database hostname |
 | externalDatabase.secretKeys.password | string | `""` | secret key in your existing k8s secret for the database password |
 | externalDatabase.secretKeys.port | string | `""` | secret key in your existing k8s secret for the database port |
+| externalDatabase.secretKeys.root_password | string | `""` | secret key in your existing k8s secret for the database root password |
 | externalDatabase.secretKeys.username | string | `""` | secret key in your existing k8s secret for the database username |
-| externalDatabase.secretName | string | `""` | existing kubernetes secret for your external Database |
+| externalDatabase.username | string | `""` | database username. ignored if existingSecret not "" |
 | fullnameOverride | string | `""` | fullname Override |
+| ghost.admin.email | string | `""` | admin email. ignored if existingSecret not "" |
+| ghost.admin.existingSecret | string | `""` | existing kubernetes secret with ghost admin credentials |
+| ghost.admin.password | string | `""` | admin password. ignored if existingSecret not "" |
+| ghost.admin.secretKeys.email | string | `""` | Key in existing Kubernetes Secret with the admin email. |
+| ghost.admin.secretKeys.password | string | `""` | Key in existing Kubernetes Secret with the admin password. |
+| ghost.admin.secretKeys.username | string | `""` | Key in existing Kubernetes Secret with the admin username. |
+| ghost.admin.username | string | `""` | admin username. ignored if existingSecret not "" |
+| ghost.blog_title | string | `""` | title of your ghost blog |
+| ghost.enable_https | string | `""` | enable HTTPS for the ghost blog |
+| ghost.host | string | `""` | hostname of the ghost blog |
+| ghost.skip_bootstrap | string | `""` | skip install of ghost at pod restart |
+| ghost.smtp.existingSecret | string | `""` | existing kubernetes secret with ghost smtp credentials |
+| ghost.smtp.host | string | `""` | smtp hostname. ignored if existingSecret not "" |
+| ghost.smtp.password | string | `""` | smtp password. ignored if existingSecret not "" |
+| ghost.smtp.port | string | `""` | smtp port. ignored if existingSecret not "" |
+| ghost.smtp.protocol | string | `""` | smtp protocol. ignored if existingSecret not "" |
+| ghost.smtp.secretKeys.host | string | `""` | Key in existing Kubernetes Secret with the smtp host. |
+| ghost.smtp.secretKeys.password | string | `""` | Key in existing Kubernetes Secret with the smtp password. |
+| ghost.smtp.secretKeys.port | string | `""` | Key in existing Kubernetes Secret with the smtp port. |
+| ghost.smtp.secretKeys.protocol | string | `""` | Key in existing Kubernetes Secret with the smtp protocol. |
+| ghost.smtp.secretKeys.username | string | `""` | Key in existing Kubernetes Secret with the smtp username. |
+| ghost.smtp.username | string | `""` | smtp username. ignored if existingSecret not "" |
 | image.pullPolicy | string | `"IfNotPresent"` | This sets the pull policy for images. |
 | image.repository | string | `"ghost"` | image repo |
 | image.tag | string | `""` |  |

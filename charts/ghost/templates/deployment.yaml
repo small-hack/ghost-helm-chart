@@ -79,6 +79,11 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.externalDatabase.existingSecret }}
                   key: {{ .Values.externalDatabase.secretKeys.password }}
+            - name: DATABASE_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.externalDatabase.existingSecret }}
+                  key: {{ .Values.externalDatabase.secretKeys.root_password }}
             {{ end }}
             {{ if .Values.ghost.smtp.existingSecret }}
             - name: mail__options__host
