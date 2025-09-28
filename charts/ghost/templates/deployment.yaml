@@ -102,7 +102,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.ghost.smtp.existingSecret }}
-                  key: {{ .Values.ghost.smtp.secretKeys.hostname }}
+                  key: {{ .Values.ghost.smtp.secretKeys.host }}
             # 9
             - name: mail__options__port
               valueFrom:
