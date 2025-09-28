@@ -101,30 +101,30 @@ spec:
             - name: mail__options__host
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.externalDatabase.existingSecret }}
-                  key: {{ .Values.externalDatabase.secretKeys.hostname }}
+                  name: {{ .Values.ghost.smtp.existingSecret }}
+                  key: {{ .Values.ghost.smtp.secretKeys.hostname }}
             # 9
             - name: mail__options__port
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.externalDatabase.existingSecret }}
-                  key: {{ .Values.externalDatabase.secretKeys.port }}
+                  name: {{ .Values.ghost.smtp.existingSecret }}
+                  key: {{ .Values.ghost.smtp.secretKeys.port }}
             # 10
             - name: mail__transport
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.externalDatabase.existingSecret }}
-                  key: {{ .Values.externalDatabase.secretKeys.protocol }}
+                  name: {{ .Values.ghost.smtp.existingSecret }}
+                  key: {{ .Values.ghost.smtp.secretKeys.protocol }}
             - name: mail__options__auth__user
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.externalDatabase.existingSecret }}
-                  key: {{ .Values.externalDatabase.secretKeys.username }}
+                  name: {{ .Values.ghost.smtp.existingSecret }}
+                  key: {{ .Values.ghost.smtp.secretKeys.username }}
             - name: mail__options__auth__pass
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.externalDatabase.existingSecret }}
-                  key: {{ .Values.externalDatabase.secretKeys.password }}
+                  name: {{ .Values.ghost.smtp.existingSecret }}
+                  key: {{ .Values.ghost.smtp.secretKeys.password }}
             {{ end }}
 
           ports:
