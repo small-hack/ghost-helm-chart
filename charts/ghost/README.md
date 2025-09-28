@@ -8,8 +8,12 @@ A Helm chart for deploying Ghost on Kubernetes
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| affinity | object | `{}` |  |
-| autoscaling | object | `{"enabled":false,"maxReplicas":100,"minReplicas":1,"targetCPUUtilizationPercentage":80}` | This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/ |
+| affinity | object | `{}` | pod or node affinity |
+| autoscaling.enabled | bool | `false` | enable autoscaling |
+| autoscaling.maxReplicas | int | `2` | autoscaling max pod replicas |
+| autoscaling.minReplicas | int | `1` | autoscaling minimum pod replicas |
+| autoscaling.targetCPUUtilizationPercentage | int | `80` | autoscaling CPU percentage to start scaling at |
+| autoscaling.targetMemoryUtilizationPercentage | int | `80` | autoscaling memory percentage to start scaling at |
 | externalDatabase.database | string | `""` | database name. ignored if existingSecret not "" |
 | externalDatabase.existingSecret | string | `""` | existing kubernetes secret for your external Database |
 | externalDatabase.host | string | `""` | database hostname. ignored if existingSecret not "" |
@@ -51,30 +55,35 @@ A Helm chart for deploying Ghost on Kubernetes
 | image.tag | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
 | ingress.annotations | object | `{}` |  |
-| ingress.className | string | `""` |  |
-| ingress.enabled | bool | `false` |  |
+| ingress.className | string | `""` | ingress class name e.g. nginx |
+| ingress.enabled | bool | `false` | enable ingress from outside the cluster |
 | ingress.hosts[0].host | string | `"chart-example.local"` |  |
 | ingress.hosts[0].paths[0].path | string | `"/"` |  |
 | ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
 | ingress.tls | list | `[]` |  |
-| livenessProbe | object | `{"httpGet":{"path":"/","port":"http"}}` | This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/ |
+| livenessProbe.httpGet.path | string | `"/"` |  |
+| livenessProbe.httpGet.port | string | `"http"` |  |
 | nameOverride | string | `""` | This is to override the chart name. |
-| nodeSelector | object | `{}` |  |
+| nodeSelector | object | `{}` | node selector |
+| persistence.accessModes | list | `[]` | accessModes for the PVC (ignored if persistence.existingClaim is set) |
+| persistence.existingClaim | string | `""` | use an existing Kubernetes Peristent Volume Claim |
+| persistence.storage | string | `"1Gi"` | size of the PVC (ignored if persistence.existingClaim is set) |
 | podAnnotations | object | `{}` | This is for setting Kubernetes Annotations to a Pod. For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/ |
 | podLabels | object | `{}` | This is for setting Kubernetes Labels to a Pod. For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/ |
-| podSecurityContext | object | `{}` |  |
+| podSecurityContext | object | `{}` | Configure Pods Security Context ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod |
 | readinessProbe.httpGet.path | string | `"/"` |  |
 | readinessProbe.httpGet.port | string | `"http"` |  |
 | replicaCount | int | `1` | This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/ |
-| resources | object | `{}` |  |
+| resources | object | `{}` | pod resources: requested cpu/mem and limits for cpu/mem |
 | securityContext | object | `{}` |  |
 | service.port | int | `80` | This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports |
+| service.targetPort | int | `2368` | this is the port in the container you want to contact |
 | service.type | string | `"ClusterIP"` | This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types |
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.automount | bool | `true` | Automatically mount a ServiceAccount's API credentials? |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
-| tolerations | list | `[]` |  |
+| tolerations | list | `[]` | tolerations to tolerate tainted nodes |
 | volumeMounts | list | `[]` | Additional volumeMounts on the output Deployment definition. |
 | volumes | list | `[]` | Additional volumes on the output Deployment definition. |
 

@@ -7,7 +7,13 @@ Yet another unofficial [ghost](https://ghost.org/) helm chart. This one is licen
 We deploy:
 
 - Deployment for [ghost](https://hub.docker.com/_/ghost) docker image
-- Secrets:
+- Persistent volume claim (or you can provide an existing one)
+- Secrets (or you can provide your own):
   - database credentials
   - smtp credentials
   - admin credentials (these don't do anything yet, but you can set them for your own automation)
+
+
+## TLDR
+
+You can find the helm parameters in the [`values.yaml`](./charts/ghost/values.yaml) and the auto-generated docs in the chart [`README.md`](./charts/ghost/README.md).
