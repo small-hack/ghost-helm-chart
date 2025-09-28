@@ -3,6 +3,19 @@ entries:
   ghost:
   - apiVersion: v2
     appVersion: 6.0.10
+    created: "2025-09-28T13:31:45.129760403Z"
+    description: A Helm chart for deploying Ghost on Kubernetes
+    digest: b85498302952ef314639da0efcd7731474daf4b3332fea2278782cb58cc168f7
+    maintainers:
+    - name: jessebot
+      url: https://jessebot.work
+    name: ghost
+    type: application
+    urls:
+    - https://github.com/small-hack/ghost-helm-chart/releases/download/ghost-1.0.5/ghost-1.0.5.tgz
+    version: 1.0.5
+  - apiVersion: v2
+    appVersion: 6.0.10
     created: "2025-09-28T13:28:41.498406001Z"
     description: A Helm chart for deploying Ghost on Kubernetes
     digest: 8af703dd328a776d68ec1c0de1fb1b058382e0df96300b511611d7ad8cc91396
@@ -66,4 +79,4 @@ entries:
     urls:
     - https://github.com/jessebot/ghost-helm-chart/releases/download/ghost-1.0.0/ghost-1.0.0.tgz
     version: 1.0.0
-generated: "2025-09-28T13:28:41.498431523Z"
+generated: "2025-09-28T13:31:45.129784759Z"
