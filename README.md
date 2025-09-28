@@ -1,6 +1,6 @@
 # Ghost helm chart
 
-<a href="https://github.com/jessebot/ghost-helm-chart/releases"><img src="https://img.shields.io/github/v/release/jessebot/ghost-helm-chart?style=plastic&labelColor=blue&color=green&logo=GitHub&logoColor=white"></a>
+<a href="https://github.com/small-hack/ghost-helm-chart/releases"><img src="https://img.shields.io/github/v/release/small-hack/ghost-helm-chart?style=plastic&labelColor=blue&color=green&logo=GitHub&logoColor=white"></a>
 
 Yet another unofficial [ghost](https://ghost.org/) helm chart. This one is licensed AGPL 3 or higher so you can actually use it however you want as long as it's open source.
 
@@ -22,7 +22,7 @@ Please read through the parameters and modify them locally before installing the
 
 ```bash
 # add the helm repo locally
-helm repo add ghost https://jessebot.github.io/ghost-helm-chart
+helm repo add ghost https://small-hack.github.io/ghost-helm-chart
 
 # downloads the values.yaml locally
 helm show values ghost/ghost > values.yaml
