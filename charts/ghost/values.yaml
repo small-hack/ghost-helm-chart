@@ -42,8 +42,11 @@ podAnnotations: {}
 # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 podLabels: {}
 
+# -- Configure Pods Security Context
+# ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
 podSecurityContext: {}
   # fsGroup: 2000
+
 
 securityContext: {}
   # capabilities:
@@ -59,10 +62,14 @@ service:
   type: ClusterIP
   # -- This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
   port: 80
+  # -- this is the port in the container you want to contact
+  targetPort: 2368
 
 # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ingress:
+  # -- enable ingress from outside the cluster
   enabled: false
+  # -- ingress class name e.g. nginx
   className: ""
   annotations: {}
     # kubernetes.io/ingress.class: nginx
@@ -77,11 +84,8 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
+# -- pod resources: requested cpu/mem and limits for cpu/mem
 resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
   #   cpu: 100m
   #   memory: 128Mi
@@ -89,7 +93,7 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-# -- This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+# This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
 livenessProbe:
   httpGet:
     path: /
@@ -99,13 +103,26 @@ readinessProbe:
     path: /
     port: http
 
-# -- This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/
+# This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/
 autoscaling:
+  # -- enable autoscaling
   enabled: false
+  # -- autoscaling minimum pod replicas
   minReplicas: 1
-  maxReplicas: 100
+  # -- autoscaling max pod replicas
+  maxReplicas: 2
+  # -- autoscaling CPU percentage to start scaling at
   targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
+  # -- autoscaling memory percentage to start scaling at
+  targetMemoryUtilizationPercentage: 80
+
+persistence:
+  # -- use an existing Kubernetes Peristent Volume Claim
+  existingClaim: ""
+  # -- size of the PVC (ignored if persistence.existingClaim is set)
+  storage: 1Gi
+  # -- accessModes for the PVC (ignored if persistence.existingClaim is set)
+  accessModes: []
 
 # -- Additional volumes on the output Deployment definition.
 volumes: []
@@ -120,10 +137,13 @@ volumeMounts: []
 #   mountPath: "/etc/foo"
 #   readOnly: true
 
+# -- node selector
 nodeSelector: {}
 
+# -- tolerations to tolerate tainted nodes
 tolerations: []
 
+# -- pod or node affinity
 affinity: {}
 
 externalDatabase:
@@ -137,6 +157,8 @@ externalDatabase:
   username: ""
   # -- database password. ignored if existingSecret not ""
   password: ""
+  # -- database root password. ignored if existingSecret not ""
+  root_password: ""
   # -- existing kubernetes secret for your external Database
   existingSecret: ""
   secretKeys:
@@ -148,12 +170,14 @@ externalDatabase:
     username: ""
     # -- secret key in your existing k8s secret for the database password
     password: ""
+    # -- secret key in your existing k8s secret for the database root password
+    root_password: ""
     # -- secret key in your existing k8s secret for the database name
     database: ""
 
 ghost:
-  # -- hostname of the ghost blog
-  host: ""
+  # -- public url of the ghost blog
+  url: ""
 
   # -- title of your ghost blog
   blog_title: ""

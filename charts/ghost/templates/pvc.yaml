@@ -1,0 +1,18 @@
+{{- if not .Values.persistence.existingClaim }}
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ include "ghost.fullname" . }}
+  labels:
+    app.kubernetes.io/component: ghost
+    app.kubernetes.io/name: ghost
+spec:
+  accessModes:
+  {{- range .Values.persistence.accessModes }}
+    - {{ . | quote }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.storage }}
+{{- end }}
