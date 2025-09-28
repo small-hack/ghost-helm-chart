@@ -188,7 +188,7 @@ ghost:
   # -- skip install of ghost at pod restart
   skip_bootstrap: false
 
-  # admin info
+  # admin user info
   admin:
     # -- admin username. ignored if existingSecret not ""
     username: ""
@@ -207,6 +207,7 @@ ghost:
       # -- Key in existing Kubernetes Secret with the admin email.
       email: ""
 
+  # SMTP, mail, configuration
   smtp:
     # -- smtp hostname. ignored if existingSecret not ""
     host: ""
@@ -236,3 +237,45 @@ ghost:
       password: ""
       # -- Key in existing Kubernetes Secret with the smtp from address.
       from_address: ""
+
+# ActivityPub configuration
+activity_pub:
+  # -- enable activity pub. I actually don't know how to make this work without
+  # activity pub :( submit a PR if you know!
+  enabled: true
+  # --  ActivityPub verison
+  version: "1.1"
+  # -- use MQ
+  useMq: false
+  # -- allow private addresses
+  allowPrivateAddress: true
+
+  # activity pub has it's own database
+  externalDatabase:
+    # -- database hostname. ignored if existingSecret not ""
+    host: ""
+    # -- database port. ignored if existingSecret not ""
+    port: ""
+    # -- database name. ignored if existingSecret not ""
+    database: ""
+    # -- database username. ignored if existingSecret not ""
+    username: ""
+    # -- database password. ignored if existingSecret not ""
+    password: ""
+    # -- database root password. ignored if existingSecret not ""
+    root_password: ""
+    # -- existing kubernetes secret for your external Database
+    existingSecret: ""
+    secretKeys:
+      # -- secret key in your existing k8s secret for the database hostname
+      hostname: ""
+      # -- secret key in your existing k8s secret for the database port
+      port: ""
+      # -- secret key in your existing k8s secret for the database username
+      username: ""
+      # -- secret key in your existing k8s secret for the database password
+      password: ""
+      # -- secret key in your existing k8s secret for the database root password
+      root_password: ""
+      # -- secret key in your existing k8s secret for the database name
+      database: ""

@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: {{ include "ghost.fullname" . }}
   labels:
-    app.kubernetes.io/component: ghost
-    app.kubernetes.io/name: ghost
     {{- include "ghost.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
@@ -97,41 +95,46 @@ spec:
                   key: {{ .Values.externalDatabase.secretKeys.root_password }}
             {{ end }}
             {{ if .Values.ghost.smtp.existingSecret }}
-            # 8
+
             - name: mail__options__host
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.ghost.smtp.existingSecret }}
                   key: {{ .Values.ghost.smtp.secretKeys.host }}
-            # 9
+
             - name: mail__options__port
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.ghost.smtp.existingSecret }}
                   key: {{ .Values.ghost.smtp.secretKeys.port }}
-            # 10
+
             - name: mail__transport
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.ghost.smtp.existingSecret }}
                   key: {{ .Values.ghost.smtp.secretKeys.protocol }}
-            # 11
+
             - name: mail__from
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.ghost.smtp.existingSecret }}
                   key: {{ .Values.ghost.smtp.secretKeys.from_address }}
+
             - name: mail__options__auth__user
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.ghost.smtp.existingSecret }}
                   key: {{ .Values.ghost.smtp.secretKeys.username }}
+
             - name: mail__options__auth__pass
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.ghost.smtp.existingSecret }}
                   key: {{ .Values.ghost.smtp.secretKeys.password }}
             {{ end }}
+
+            - name: ACTIVITYPUB_TARGET
+              value: "{{ include "ghost.fullname" . }}-activitypub:8080"
 
           ports:
             - name: http

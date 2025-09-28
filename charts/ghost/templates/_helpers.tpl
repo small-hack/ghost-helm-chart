@@ -60,3 +60,11 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+ActivityPub selector labels
+*/}}
+{{- define "ghost.activitypubSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "ghost.name" . }}-activitypub
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}

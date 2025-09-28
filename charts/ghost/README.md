@@ -14,6 +14,23 @@ A Helm chart for deploying Ghost on Kubernetes
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| activity_pub.allowPrivateAddress | bool | `true` | allow private addresses |
+| activity_pub.enabled | bool | `true` | enable activity pub. I actually don't know how to make this work without activity pub :( submit a PR if you know! |
+| activity_pub.externalDatabase.database | string | `""` | database name. ignored if existingSecret not "" |
+| activity_pub.externalDatabase.existingSecret | string | `""` | existing kubernetes secret for your external Database |
+| activity_pub.externalDatabase.host | string | `""` | database hostname. ignored if existingSecret not "" |
+| activity_pub.externalDatabase.password | string | `""` | database password. ignored if existingSecret not "" |
+| activity_pub.externalDatabase.port | string | `""` | database port. ignored if existingSecret not "" |
+| activity_pub.externalDatabase.root_password | string | `""` | database root password. ignored if existingSecret not "" |
+| activity_pub.externalDatabase.secretKeys.database | string | `""` | secret key in your existing k8s secret for the database name |
+| activity_pub.externalDatabase.secretKeys.hostname | string | `""` | secret key in your existing k8s secret for the database hostname |
+| activity_pub.externalDatabase.secretKeys.password | string | `""` | secret key in your existing k8s secret for the database password |
+| activity_pub.externalDatabase.secretKeys.port | string | `""` | secret key in your existing k8s secret for the database port |
+| activity_pub.externalDatabase.secretKeys.root_password | string | `""` | secret key in your existing k8s secret for the database root password |
+| activity_pub.externalDatabase.secretKeys.username | string | `""` | secret key in your existing k8s secret for the database username |
+| activity_pub.externalDatabase.username | string | `""` | database username. ignored if existingSecret not "" |
+| activity_pub.useMq | bool | `false` | use MQ |
+| activity_pub.version | string | `"1.1"` | ActivityPub verison |
 | affinity | object | `{}` | pod or node affinity |
 | autoscaling.enabled | bool | `false` | enable autoscaling |
 | autoscaling.maxReplicas | int | `2` | autoscaling max pod replicas |

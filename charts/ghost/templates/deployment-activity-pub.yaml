@@ -1,0 +1,142 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ghost.fullname" . }}-activity-pub
+  labels:
+    app.kubernetes.io/component: activitypub
+    {{- include "ghost.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "ghost.activitypubSelectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "ghost.activitypubSelectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: activitypub
+        {{- include "ghost.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "ghost.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: activitypub
+          image: "ghcr.io/tryghost/activitypub:{{ .Values.activity_pub.version }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{ if not .Values.activity_pub.externalDatabase.existingSecret }}
+          envFrom:
+            - secretRef:
+                name: {{ include "ghost.fullname" . }}-activitypub-db
+          {{- end }}
+          env:
+            - name: PORT
+              value: "8080"
+            {{ if .Values.activity_pub.externalDatabase.existingSecret }}
+            - name: MYSQL_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.activity_pub.externalDatabase.existingSecret }}
+                  key: {{ .Values.activity_pub.externalDatabase.secretKeys.hostname }}
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.activity_pub.externalDatabase.existingSecret }}
+                  key: {{ .Values.activity_pub.externalDatabase.secretKeys.database }}
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.activity_pub.externalDatabase.existingSecret }}
+                  key: {{ .Values.activity_pub.externalDatabase.secretKeys.username }}
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.activity_pub.externalDatabase.existingSecret }}
+                  key: {{ .Values.activity_pub.externalDatabase.secretKeys.password }}
+            {{ end }}
+
+            - name: ALLOW_PRIVATE_ADDRESS
+              value: {{ .Values.activity_pub.allowPrivateAddress | quote }}
+
+            - name: USE_MQ
+              value: {{ .Values.activity_pub.useMq | quote }}
+
+            - name: LOCAL_STORAGE_PATH
+              value: /opt/activitypub/content/images/activitypub
+
+            - name: LOCAL_STORAGE_HOSTING_URL
+              value: "{{ .Values.ghost.url }}/content/images/activitypub"
+
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.targetPort }}
+              protocol: TCP
+
+          {{- with .Values.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          {{- with .Values.readinessProbe }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          volumeMounts:
+            - name: ghost-data
+              mountPath: /opt/activitypub/content
+          {{- with .Values.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+      volumes:
+        - name: ghost-data
+          persistentVolumeClaim:
+            {{- if .Values.persistence.existingClaim }}
+            claimName: {{ .Values.persistence.existingClaim }}
+            {{- else }}
+            claimName: {{ include "ghost.fullname" . }}
+            {{- end }}
+      {{- with .Values.volumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

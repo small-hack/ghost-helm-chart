@@ -1,0 +1,18 @@
+{{- if .Values.activity_pub.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "ghost.fullname" . }}-activitypub
+  labels:
+    {{- include "ghost.labels" . | nindent 4 }}
+    app.kubernetes.io/component: activitypub
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "ghost.activitypubSelectorLabels" . | nindent 4 }}
+{{- end }}
