@@ -1,6 +1,6 @@
 # ghost
 
-![Version: 1.0.5](https://img.shields.io/badge/Version-1.0.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
+![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
 
 A Helm chart for deploying Ghost on Kubernetes
 
@@ -45,10 +45,12 @@ A Helm chart for deploying Ghost on Kubernetes
 | ghost.enable_https | bool | `false` | enable HTTPS for the ghost blog |
 | ghost.skip_bootstrap | bool | `false` | skip install of ghost at pod restart |
 | ghost.smtp.existingSecret | string | `""` | existing kubernetes secret with ghost smtp credentials |
+| ghost.smtp.from_address | string | `""` | smtp from address. ignored if existingSecret not "" |
 | ghost.smtp.host | string | `""` | smtp hostname. ignored if existingSecret not "" |
 | ghost.smtp.password | string | `""` | smtp password. ignored if existingSecret not "" |
 | ghost.smtp.port | string | `""` | smtp port. ignored if existingSecret not "" |
 | ghost.smtp.protocol | string | `""` | smtp protocol. ignored if existingSecret not "" |
+| ghost.smtp.secretKeys.from_address | string | `""` | Key in existing Kubernetes Secret with the smtp from address. |
 | ghost.smtp.secretKeys.host | string | `""` | Key in existing Kubernetes Secret with the smtp host. |
 | ghost.smtp.secretKeys.password | string | `""` | Key in existing Kubernetes Secret with the smtp password. |
 | ghost.smtp.secretKeys.port | string | `""` | Key in existing Kubernetes Secret with the smtp port. |

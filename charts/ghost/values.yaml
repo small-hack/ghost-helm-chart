@@ -218,6 +218,8 @@ ghost:
     password: ""
     # -- smtp protocol. ignored if existingSecret not ""
     protocol: ""
+    # -- smtp from address. ignored if existingSecret not ""
+    from_address: ""
     # -- existing kubernetes secret with ghost smtp credentials
     existingSecret: ""
     # keys in existing kubernetes secret for smtp credentials
@@ -232,3 +234,5 @@ ghost:
       username: ""
       # -- Key in existing Kubernetes Secret with the smtp password.
       password: ""
+      # -- Key in existing Kubernetes Secret with the smtp from address.
+      from_address: ""

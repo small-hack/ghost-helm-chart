@@ -115,6 +115,12 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.ghost.smtp.existingSecret }}
                   key: {{ .Values.ghost.smtp.secretKeys.protocol }}
+            # 11
+            - name: mail__from
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.ghost.smtp.existingSecret }}
+                  key: {{ .Values.ghost.smtp.secretKeys.from_address }}
             - name: mail__options__auth__user
               valueFrom:
                 secretKeyRef:
