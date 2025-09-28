@@ -183,10 +183,10 @@ ghost:
   blog_title: ""
 
   # -- enable HTTPS for the ghost blog
-  enable_https: ""
+  enable_https: false
 
   # -- skip install of ghost at pod restart
-  skip_bootstrap: ""
+  skip_bootstrap: false
 
   # admin info
   admin:

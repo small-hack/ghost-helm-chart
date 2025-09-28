@@ -52,36 +52,44 @@ spec:
                 name: {{ include "ghost.fullname" . }}-smtp
           {{- end }}
           env:
+            # 0
             - name: url
               value: {{ .Values.ghost.url }}
+            # 1
             - name: database__client
               value: mysql
             {{ if .Values.externalDatabase.existingSecret }}
+            # 2
             - name: database__connection__host
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.externalDatabase.existingSecret }}
                   key: {{ .Values.externalDatabase.secretKeys.hostname }}
+            # 3
             - name: database__connection__port
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.externalDatabase.existingSecret }}
                   key: {{ .Values.externalDatabase.secretKeys.port }}
+            # 4
             - name: database__connection__database
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.externalDatabase.existingSecret }}
                   key: {{ .Values.externalDatabase.secretKeys.database }}
+            # 5
             - name: database__connection__user
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.externalDatabase.existingSecret }}
                   key: {{ .Values.externalDatabase.secretKeys.username }}
+            # 6
             - name: database__connection__password
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.externalDatabase.existingSecret }}
                   key: {{ .Values.externalDatabase.secretKeys.password }}
+            # 7
             - name: DATABASE_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -89,16 +97,19 @@ spec:
                   key: {{ .Values.externalDatabase.secretKeys.root_password }}
             {{ end }}
             {{ if .Values.ghost.smtp.existingSecret }}
+            # 8
             - name: mail__options__host
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.externalDatabase.existingSecret }}
                   key: {{ .Values.externalDatabase.secretKeys.hostname }}
+            # 9
             - name: mail__options__port
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.externalDatabase.existingSecret }}
                   key: {{ .Values.externalDatabase.secretKeys.port }}
+            # 10
             - name: mail__transport
               valueFrom:
                 secretKeyRef:
@@ -118,9 +129,6 @@ spec:
 
           ports:
             - name: http
-              containerPort: {{ .Values.service.targetPort }}
-              protocol: TCP
-            - name: https
               containerPort: {{ .Values.service.targetPort }}
               protocol: TCP
 
