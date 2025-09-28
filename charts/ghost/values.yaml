@@ -176,8 +176,8 @@ externalDatabase:
     database: ""
 
 ghost:
-  # -- hostname of the ghost blog
-  host: ""
+  # -- public url of the ghost blog
+  url: ""
 
   # -- title of your ghost blog
   blog_title: ""

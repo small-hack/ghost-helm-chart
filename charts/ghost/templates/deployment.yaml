@@ -55,8 +55,11 @@ spec:
                 name: {{ . }}
             {{- end }}
           {{- end }}
-          {{ if or .Values.externalDatabase.existingSecret .Values.ghost.smtp.existingSecret }}
           env:
+            - name: url
+              value: {{ .Values.ghost.url }}
+            - name: database__client
+              value: mysql
             {{ if .Values.externalDatabase.existingSecret }}
             - name: database__connection__host
               valueFrom:
@@ -116,7 +119,6 @@ spec:
                   name: {{ .Values.externalDatabase.existingSecret }}
                   key: {{ .Values.externalDatabase.secretKeys.password }}
             {{ end }}
-          {{- end }}
 
           ports:
             - name: http

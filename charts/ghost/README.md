@@ -1,8 +1,14 @@
 # ghost
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
+![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
 
 A Helm chart for deploying Ghost on Kubernetes
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| jessebot |  | <https://jessebot.work> |
 
 ## Values
 
@@ -37,7 +43,6 @@ A Helm chart for deploying Ghost on Kubernetes
 | ghost.admin.username | string | `""` | admin username. ignored if existingSecret not "" |
 | ghost.blog_title | string | `""` | title of your ghost blog |
 | ghost.enable_https | string | `""` | enable HTTPS for the ghost blog |
-| ghost.host | string | `""` | hostname of the ghost blog |
 | ghost.skip_bootstrap | string | `""` | skip install of ghost at pod restart |
 | ghost.smtp.existingSecret | string | `""` | existing kubernetes secret with ghost smtp credentials |
 | ghost.smtp.host | string | `""` | smtp hostname. ignored if existingSecret not "" |
@@ -50,6 +55,7 @@ A Helm chart for deploying Ghost on Kubernetes
 | ghost.smtp.secretKeys.protocol | string | `""` | Key in existing Kubernetes Secret with the smtp protocol. |
 | ghost.smtp.secretKeys.username | string | `""` | Key in existing Kubernetes Secret with the smtp username. |
 | ghost.smtp.username | string | `""` | smtp username. ignored if existingSecret not "" |
+| ghost.url | string | `""` | public url of the ghost blog |
 | image.pullPolicy | string | `"IfNotPresent"` | This sets the pull policy for images. |
 | image.repository | string | `"ghost"` | image repo |
 | image.tag | string | `""` |  |
