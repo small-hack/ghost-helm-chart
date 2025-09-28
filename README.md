@@ -17,3 +17,18 @@ We deploy:
 ## TLDR
 
 You can find the helm parameters in the [`values.yaml`](./charts/ghost/values.yaml) and the auto-generated docs in the chart [`README.md`](./charts/ghost/README.md).
+
+Please read through the parameters and modify them locally before installing the chart:
+
+```bash
+# add the helm repo locally
+helm repo add ghost https://jessebot.github.io/ghost-helm-chart
+
+# downloads the values.yaml locally
+helm show values ghost/ghost > values.yaml
+
+# You should then edit the values.yaml to your liking.
+
+# install the chart
+helm install my-release-name ghost/ghost --values values.yaml
+```
