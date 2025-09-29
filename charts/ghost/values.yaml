@@ -175,8 +175,17 @@ externalDatabase:
     database: ""
 
 ghost:
-  # -- public url of the ghost blog (must include http:// or https://)
+  # -- public url of the ghost blog (must INCLUDE http:// or https://)
+  # e.g. https://blog.example.com
   url: ""
+
+  # -- domain of the ghost blog (must NOT include http:// or https://)
+  # e.g. blog.example.com
+  domain: ""
+
+  # -- admin domain of the ghost blog, used for admin portal
+  # (must NOT include http:// or https://) e.g. admin.blog.example.com
+  admin_domain: ""
 
   # -- title of your ghost blog
   blog_title: ""

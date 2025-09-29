@@ -50,44 +50,52 @@ spec:
                 name: {{ include "ghost.fullname" . }}-smtp
           {{- end }}
           env:
-            # 0
             - name: url
               value: {{ .Values.ghost.url }}
-            # 1
+
+            - name: DOMAIN
+              value: {{ .Values.ghost.domain }}
+
+            - name: ADMIN_DOMAIN
+              value: {{ .Values.ghost.admin_domain }}
+
             - name: database__client
               value: mysql
+
+            - name: ACTIVITYPUB_TARGET
+              value: "{{ include "ghost.fullname" . }}-activitypub.{{ .Release.Namespace }}.svc:{{ .Values.activity_pub.service.port }}"
+
             {{ if .Values.externalDatabase.existingSecret }}
-            # 2
             - name: database__connection__host
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.externalDatabase.existingSecret }}
                   key: {{ .Values.externalDatabase.secretKeys.hostname }}
-            # 3
+
             - name: database__connection__port
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.externalDatabase.existingSecret }}
                   key: {{ .Values.externalDatabase.secretKeys.port }}
-            # 4
+
             - name: database__connection__database
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.externalDatabase.existingSecret }}
                   key: {{ .Values.externalDatabase.secretKeys.database }}
-            # 5
+
             - name: database__connection__user
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.externalDatabase.existingSecret }}
                   key: {{ .Values.externalDatabase.secretKeys.username }}
-            # 6
+
             - name: database__connection__password
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.externalDatabase.existingSecret }}
                   key: {{ .Values.externalDatabase.secretKeys.password }}
-            # 7
+
             - name: DATABASE_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -132,9 +140,6 @@ spec:
                   name: {{ .Values.ghost.smtp.existingSecret }}
                   key: {{ .Values.ghost.smtp.secretKeys.password }}
             {{ end }}
-
-            - name: ACTIVITYPUB_TARGET
-              value: "{{ include "ghost.fullname" . }}-activitypub:8080"
 
           ports:
             - name: http
