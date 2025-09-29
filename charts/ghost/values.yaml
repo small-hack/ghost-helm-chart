@@ -282,6 +282,8 @@ activity_pub:
   # -- allow private addresses
   allowPrivateAddress: true
 
+  skipSignatureVerfication: true
+
   # activity pub has it's own database
   externalDatabase:
     # -- database hostname. ignored if existingSecret not ""

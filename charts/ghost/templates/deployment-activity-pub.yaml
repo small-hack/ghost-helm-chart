@@ -66,16 +66,25 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.activity_pub.externalDatabase.existingSecret }}
                   key: {{ .Values.activity_pub.externalDatabase.secretKeys.hostname }}
+
+            - name: MYSQL_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.activity_pub.externalDatabase.existingSecret }}
+                  key: {{ .Values.activity_pub.externalDatabase.secretKeys.port }}
+
             - name: MYSQL_DATABASE
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.activity_pub.externalDatabase.existingSecret }}
                   key: {{ .Values.activity_pub.externalDatabase.secretKeys.database }}
+
             - name: MYSQL_USER
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.activity_pub.externalDatabase.existingSecret }}
                   key: {{ .Values.activity_pub.externalDatabase.secretKeys.username }}
+
             - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -85,6 +94,9 @@ spec:
 
             - name: ALLOW_PRIVATE_ADDRESS
               value: {{ .Values.activity_pub.allowPrivateAddress | quote }}
+
+            - name: SKIP_SIGNATURE_VERIFICATION
+              value: {{ .Values.activity_pub.skipSignatureVerfication | quote }}
 
             - name: USE_MQ
               value: {{ .Values.activity_pub.useMq | quote }}
