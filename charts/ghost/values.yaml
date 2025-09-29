@@ -354,7 +354,7 @@ activity_pub:
     # runAsNonRoot: true
     # runAsUser: 1000
 
-# -- Options for embedded nginx reverse-proxy
+# Options for embedded nginx reverse-proxy
 proxy:
   # -- enable/disable the embedded proxy
   enabled: true
