@@ -1,3 +1,4 @@
+{{- if eq .Values.proxy.enabled true }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -6,5 +7,5 @@ metadata:
 data:
   nginx.conf: |
     {{- .Files.Get "files/nginx.conf" | nindent 4 }}
-
+{{- end }}
 

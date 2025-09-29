@@ -353,3 +353,8 @@ activity_pub:
     # readOnlyRootFilesystem: true
     # runAsNonRoot: true
     # runAsUser: 1000
+
+# -- Options for embedded nginx reverse-proxy
+proxy:
+  # -- enable/disable the embedded proxy
+  enabled: true

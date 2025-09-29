@@ -1,3 +1,4 @@
+{{- if eq .Values.proxy.enabled true }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -8,9 +9,10 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: nginx
+    - name: nginx
+      port: 80
       targetPort: 80
       protocol: TCP
-      name: http
   selector:
     {{- include "ghost.selectorLabels" . | nindent 4 }}
+{{- end }}

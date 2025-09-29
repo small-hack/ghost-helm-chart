@@ -1,3 +1,4 @@
+{{- if eq .Values.proxy.enabled true }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -46,3 +47,4 @@ spec:
           items:
             - key: nginx.conf
               path: nginx.conf
+{{- end }}
