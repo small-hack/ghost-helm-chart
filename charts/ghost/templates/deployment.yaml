@@ -42,13 +42,15 @@ spec:
           {{- end }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{ if or (not .Values.externalDatabase.existingSecret) (not .Values.ghost.smtp.existingSecret) }}
+
+          {{- if or (not .Values.externalDatabase.existingSecret) (not .Values.ghost.smtp.existingSecret) }}
           envFrom:
             - secretRef:
                 name: {{ include "ghost.fullname" . }}-db
             - secretRef:
                 name: {{ include "ghost.fullname" . }}-smtp
           {{- end }}
+
           env:
             - name: url
               value: {{ .Values.ghost.url }}
@@ -65,7 +67,7 @@ spec:
             - name: ACTIVITYPUB_TARGET
               value: "{{ include "ghost.fullname" . }}-activitypub.{{ .Release.Namespace }}.svc:{{ .Values.activity_pub.service.port }}"
 
-            {{ if .Values.externalDatabase.existingSecret }}
+            {{- if .Values.externalDatabase.existingSecret }}
             - name: database__connection__host
               valueFrom:
                 secretKeyRef:
@@ -101,9 +103,9 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.externalDatabase.existingSecret }}
                   key: {{ .Values.externalDatabase.secretKeys.root_password }}
-            {{ end }}
-            {{ if .Values.ghost.smtp.existingSecret }}
+            {{- end }}
 
+            {{- if .Values.ghost.smtp.existingSecret }}
             - name: mail__options__host
               valueFrom:
                 secretKeyRef:

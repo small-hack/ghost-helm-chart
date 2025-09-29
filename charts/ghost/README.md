@@ -1,6 +1,6 @@
 # ghost
 
-![Version: 1.5.2](https://img.shields.io/badge/Version-1.5.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
+![Version: 1.6.0](https://img.shields.io/badge/Version-1.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
 
 A Helm chart for deploying Ghost on Kubernetes
 
@@ -22,12 +22,13 @@ A Helm chart for deploying Ghost on Kubernetes
 | activity_pub.externalDatabase.password | string | `""` | database password. ignored if existingSecret not "" |
 | activity_pub.externalDatabase.port | string | `""` | database port. ignored if existingSecret not "" |
 | activity_pub.externalDatabase.root_password | string | `""` | database root password. ignored if existingSecret not "" |
-| activity_pub.externalDatabase.secretKeys.database | string | `""` | secret key in your existing k8s secret for the database name |
-| activity_pub.externalDatabase.secretKeys.hostname | string | `""` | secret key in your existing k8s secret for the database hostname |
-| activity_pub.externalDatabase.secretKeys.password | string | `""` | secret key in your existing k8s secret for the database password |
-| activity_pub.externalDatabase.secretKeys.port | string | `""` | secret key in your existing k8s secret for the database port |
-| activity_pub.externalDatabase.secretKeys.root_password | string | `""` | secret key in your existing k8s secret for the database root password |
-| activity_pub.externalDatabase.secretKeys.username | string | `""` | secret key in your existing k8s secret for the database username |
+| activity_pub.externalDatabase.secretKeys.connection_string | string | `""` | secret key in existing k8s secret for ActivityPub mysql connection string |
+| activity_pub.externalDatabase.secretKeys.database | string | `""` | secret key in existing k8s secret for ActivityPub database name |
+| activity_pub.externalDatabase.secretKeys.hostname | string | `""` | secret key in existing k8s secret for ActivityPub database hostname |
+| activity_pub.externalDatabase.secretKeys.password | string | `""` | secret key in existing k8s secret for ActivityPub database password |
+| activity_pub.externalDatabase.secretKeys.port | string | `""` | secret key in existing k8s secret for ActivityPub database port |
+| activity_pub.externalDatabase.secretKeys.root_password | string | `""` | secret key in existing k8s secret for ActivityPub database root password |
+| activity_pub.externalDatabase.secretKeys.username | string | `""` | secret key in existing k8s secret for ActivityPub database username |
 | activity_pub.externalDatabase.username | string | `""` | database username. ignored if existingSecret not "" |
 | activity_pub.podSecurityContext | object | `{}` | Configure Pods Security Context ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod |
 | activity_pub.resources | object | `{}` | pod resources: requested cpu/mem and limits for cpu/mem |

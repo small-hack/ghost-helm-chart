@@ -31,19 +31,36 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      initContainers:
+        - name: activitypub-migrate
+          image: "ghcr.io/tryghost/activitypub-migrations:{{ .Values.activity_pub.version }}"
+          env:
+            - name: MYSQL_DB
+              valueFrom:
+                secretKeyRef:
+                  {{- if .Values.activity_pub.externalDatabase.existingSecret }}
+                  name: {{ .Values.activity_pub.externalDatabase.existingSecret }}
+                  key: {{ .Values.activity_pub.externalDatabase.secretKeys.connection_string }}
+                  {{- else }}
+                  name: {{ include "ghost.fullname" . }}-activitypub-db
+                  key: MYSQL_CONNECTION_STRING
+                  {{- end }}
       containers:
         - name: activitypub
           image: "ghcr.io/tryghost/activitypub:{{ .Values.activity_pub.version }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{ if not .Values.activity_pub.externalDatabase.existingSecret }}
+
+          {{- if not .Values.activity_pub.externalDatabase.existingSecret }}
           envFrom:
             - secretRef:
                 name: {{ include "ghost.fullname" . }}-activitypub-db
           {{- end }}
+
           env:
             - name: PORT
               value: "8080"
-            {{ if .Values.activity_pub.externalDatabase.existingSecret }}
+
+            {{- if .Values.activity_pub.externalDatabase.existingSecret }}
             - name: MYSQL_HOST
               valueFrom:
                 secretKeyRef:

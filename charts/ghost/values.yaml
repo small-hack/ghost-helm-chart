@@ -275,18 +275,20 @@ activity_pub:
     # -- existing kubernetes secret for your external Database
     existingSecret: ""
     secretKeys:
-      # -- secret key in your existing k8s secret for the database hostname
+      # -- secret key in existing k8s secret for ActivityPub database hostname
       hostname: ""
-      # -- secret key in your existing k8s secret for the database port
+      # -- secret key in existing k8s secret for ActivityPub database port
       port: ""
-      # -- secret key in your existing k8s secret for the database username
+      # -- secret key in existing k8s secret for ActivityPub database username
       username: ""
-      # -- secret key in your existing k8s secret for the database password
+      # -- secret key in existing k8s secret for ActivityPub database password
       password: ""
-      # -- secret key in your existing k8s secret for the database root password
+      # -- secret key in existing k8s secret for ActivityPub database root password
       root_password: ""
-      # -- secret key in your existing k8s secret for the database name
+      # -- secret key in existing k8s secret for ActivityPub database name
       database: ""
+      # -- secret key in existing k8s secret for ActivityPub mysql connection string
+      connection_string: ""
 
   service:
     # -- This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
