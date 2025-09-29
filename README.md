@@ -2,20 +2,20 @@
 
 <a href="https://github.com/small-hack/ghost-helm-chart/releases"><img src="https://img.shields.io/github/v/release/small-hack/ghost-helm-chart?style=plastic&labelColor=blue&color=green&logo=GitHub&logoColor=white"></a>
 
-Yet another unofficial [ghost](https://ghost.org/) helm chart. This one is licensed AGPL 3 or higher so you can actually use it however you want as long as it's open source.
+Yet another (unofficial) [Ghost](https://ghost.org/) helm chart. This one is licensed [AGPL](./LICENSE), so please feel free to do as you like as long as you keep it open source 💚
 
-We deploy:
+This helm chart deploys:
 
 - Deployments/Services for:
-  - [ghost](https://hub.docker.com/_/ghost) docker image
-  - [ActivityPub](https://github.com/orgs/TryGhost/packages?repo_name=ActivityPub) docker image (and migrations image to run before that as an initContainer)
-  - nginx-proxy should you need that
-- Persistent volume claim (or you can provide an existing one)
+  - [Ghost](https://hub.docker.com/_/ghost)
+  - [ActivityPub](https://github.com/orgs/TryGhost/packages?repo_name=ActivityPub) (and migrations image to run before that as an initContainer)
+  - nginx-proxy (should you need that)
+- PersistentVolumeClaim (or you can provide an existing one)
 - Ingress (includes activityPub routes)
 - Secrets (or you can provide your own):
   - MySQL credentials (one for ActivityPub and one for Ghost)
   - SMTP credentials
-  - Ghost Admin credentials (these don't do anything yet, but you can set them for your own automation)
+  - Ghost Admin credentials (these don't do anything *yet*, but you can set them for your own automation)
 
 ## TLDR
 
@@ -35,3 +35,9 @@ helm show values ghost/ghost > values.yaml
 # install the chart
 helm install my-release-name ghost/ghost --values values.yaml
 ```
+
+### Example usage in Argo CD
+
+If you're using Argo CD, you may find these App of apps directories useful (there's an `app_of_apps`, as well as an `app_of_apps_with_tolerations`):
+
+https://github.com/small-hack/argocd-apps/blob/main/ghost/
