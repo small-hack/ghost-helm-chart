@@ -6,13 +6,16 @@ Yet another unofficial [ghost](https://ghost.org/) helm chart. This one is licen
 
 We deploy:
 
-- Deployment for [ghost](https://hub.docker.com/_/ghost) docker image
-- Deployment for ActivityPub docker image
+- Deployments/Services for:
+  - [ghost](https://hub.docker.com/_/ghost) docker image
+  - [ActivityPub](https://github.com/orgs/TryGhost/packages?repo_name=ActivityPub) docker image (and migrations image to run before that as an initContainer)
+  - nginx-proxy should you need that
 - Persistent volume claim (or you can provide an existing one)
+- Ingress (includes activityPub routes)
 - Secrets (or you can provide your own):
-  - database credentials
-  - smtp credentials
-  - admin credentials (these don't do anything yet, but you can set them for your own automation)
+  - MySQL credentials (one for ActivityPub and one for Ghost)
+  - SMTP credentials
+  - Ghost Admin credentials (these don't do anything yet, but you can set them for your own automation)
 
 ## TLDR
 
