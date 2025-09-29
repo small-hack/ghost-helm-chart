@@ -1,6 +1,6 @@
 # ghost
 
-![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
+![Version: 1.3.0](https://img.shields.io/badge/Version-1.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
 
 A Helm chart for deploying Ghost on Kubernetes
 
@@ -29,6 +29,9 @@ A Helm chart for deploying Ghost on Kubernetes
 | activity_pub.externalDatabase.secretKeys.root_password | string | `""` | secret key in your existing k8s secret for the database root password |
 | activity_pub.externalDatabase.secretKeys.username | string | `""` | secret key in your existing k8s secret for the database username |
 | activity_pub.externalDatabase.username | string | `""` | database username. ignored if existingSecret not "" |
+| activity_pub.service.port | int | `8080` | This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports |
+| activity_pub.service.targetPort | int | `8080` | this is the port in the container you want to contact |
+| activity_pub.service.type | string | `"ClusterIP"` | This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types |
 | activity_pub.useMq | bool | `false` | use MQ |
 | activity_pub.version | string | `"1.1"` | ActivityPub verison |
 | affinity | object | `{}` | pod or node affinity |

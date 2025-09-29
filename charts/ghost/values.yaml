@@ -279,3 +279,11 @@ activity_pub:
       root_password: ""
       # -- secret key in your existing k8s secret for the database name
       database: ""
+
+  service:
+    # -- This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+    type: ClusterIP
+    # -- This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
+    port: 8080
+    # -- this is the port in the container you want to contact
+    targetPort: 8080

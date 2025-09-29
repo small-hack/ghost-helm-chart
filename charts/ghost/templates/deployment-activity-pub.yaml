@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "ghost.fullname" . }}-activity-pub
+  name: {{ include "ghost.fullname" . }}-activitypub
   labels:
-    app.kubernetes.io/component: activitypub
     {{- include "ghost.labels" . | nindent 4 }}
+    app.kubernetes.io/component: activitypub
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
@@ -21,10 +21,6 @@ spec:
       labels:
         {{- include "ghost.activitypubSelectorLabels" . | nindent 8 }}
         app.kubernetes.io/component: activitypub
-        {{- include "ghost.labels" . | nindent 8 }}
-        {{- with .Values.podLabels }}
-        {{- toYaml . | nindent 8 }}
-        {{- end }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

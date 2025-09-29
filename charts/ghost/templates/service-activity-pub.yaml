@@ -9,8 +9,8 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: 8080
-      targetPort: 8080
+    - port: {{ .Values.activity_pub.service.port }}
+      targetPort: {{ .Values.activity_pub.service.targetPort }}
       protocol: TCP
       name: http
   selector:
