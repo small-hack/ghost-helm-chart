@@ -28,6 +28,32 @@ spec:
     - host: {{ .host | quote }}
       http:
         paths:
+          {{- if $.Values.activity_pub.enabled }}
+          # ActivityPub routes (must come before the catch-all route)
+          - path: /\.ghost/activitypub(/.*)?
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ include "ghost.fullname" $ }}-activitypub
+                port:
+                  number: {{ $.Values.activity_pub.service.port }}
+          - path: /\.well-known/webfinger
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ include "ghost.fullname" $ }}-activitypub
+                port:
+                  number: {{ $.Values.activity_pub.service.port }}
+          - path: /\.well-known/nodeinfo
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ include "ghost.fullname" $ }}-activitypub
+                port:
+                  number: {{ $.Values.activity_pub.service.port }}
+          {{- end }}
+
+          # regular ghost stuff
           {{- range .paths }}
           - path: {{ .path }}
             {{- with .pathType }}
@@ -39,5 +65,41 @@ spec:
                 port:
                   number: {{ $.Values.service.port }}
           {{- end }}
+
+    # Admin domain
+    - host: {{ $.Values.ghost.admin_domain | quote }}
+      http:
+        paths:
+          {{- if $.Values.activity_pub.enabled }}
+          # ActivityPub routes (must come before the catch-all route)
+          - path: /\.ghost/activitypub(/.*)?
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ include "ghost.fullname" $ }}-activitypub
+                port:
+                  number: {{ $.Values.activity_pub.service.port }}
+          - path: /\.well-known/webfinger
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ include "ghost.fullname" $ }}-activitypub
+                port:
+                  number: {{ $.Values.activity_pub.service.port }}
+          - path: /\.well-known/nodeinfo
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ include "ghost.fullname" $ }}-activitypub
+                port:
+                  number: {{ $.Values.activity_pub.service.port }}
+          {{- end }}
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "ghost.fullname" $ }}
+                port:
+                  number: {{ $.Values.service.port }}
     {{- end }}
 {{- end }}
