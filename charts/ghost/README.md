@@ -1,6 +1,6 @@
 # ghost
 
-![Version: 1.7.1](https://img.shields.io/badge/Version-1.7.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
+![Version: 1.9.0](https://img.shields.io/badge/Version-1.9.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
 
 A Helm chart for deploying Ghost on Kubernetes
 
@@ -40,6 +40,7 @@ A Helm chart for deploying Ghost on Kubernetes
 | activity_pub.service.port | int | `8080` | sets the ActivityPub ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports |
 | activity_pub.service.targetPort | int | `8080` | port in the ActivityPub container you want to contact |
 | activity_pub.service.type | string | `"ClusterIP"` | sets the ActivityPub service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types |
+| activity_pub.skipSignatureVerfication | bool | `false` | not sure what this does. found it in a docker compose |
 | activity_pub.useMq | bool | `false` | use MQ |
 | affinity | object | `{}` | pod or node affinity |
 | autoscaling.enabled | bool | `false` | enable autoscaling |
@@ -69,6 +70,7 @@ A Helm chart for deploying Ghost on Kubernetes
 | ghost.admin.secretKeys.username | string | `""` | Key in existing Kubernetes Secret with the admin username. |
 | ghost.admin.username | string | `""` | admin username. ignored if existingSecret not "" |
 | ghost.admin_domain | string | `""` | admin domain of the ghost blog, used for admin portal (must NOT include http:// or https://) e.g. admin.blog.example.com |
+| ghost.admin_url | string | `""` | public admin url of the ghost blog (must INCLUDE http:// or https://) e.g. https://admin.blog.example.com |
 | ghost.blog_title | string | `""` | title of your ghost blog |
 | ghost.domain | string | `""` | domain of the ghost blog (must NOT include http:// or https://) e.g. blog.example.com |
 | ghost.enable_https | bool | `false` | enable HTTPS for the ghost blog |

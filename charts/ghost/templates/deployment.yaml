@@ -55,6 +55,9 @@ spec:
             - name: url
               value: {{ .Values.ghost.url }}
 
+            - name: admin__url
+              value: {{ .Values.ghost.admin_url }}
+
             - name: DOMAIN
               value: {{ .Values.ghost.domain }}
 

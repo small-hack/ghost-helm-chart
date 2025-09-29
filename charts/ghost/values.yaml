@@ -195,6 +195,10 @@ ghost:
   # e.g. blog.example.com
   domain: ""
 
+  # -- public admin url of the ghost blog (must INCLUDE http:// or https://)
+  # e.g. https://admin.blog.example.com
+  admin_url: ""
+
   # -- admin domain of the ghost blog, used for admin portal
   # (must NOT include http:// or https://) e.g. admin.blog.example.com
   admin_domain: ""
@@ -282,7 +286,8 @@ activity_pub:
   # -- allow private addresses
   allowPrivateAddress: true
 
-  skipSignatureVerfication: true
+  # -- not sure what this does. found it in a docker compose
+  skipSignatureVerfication: false
 
   # activity pub has it's own database
   externalDatabase:
