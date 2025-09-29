@@ -1,4 +1,4 @@
-{{- if eq .Values.proxy.enabled true }}
+{{- if .Values.proxy.enabled }}
 ---
 apiVersion: apps/v1
 kind: Deployment
