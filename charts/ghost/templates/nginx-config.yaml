@@ -5,7 +5,9 @@ kind: ConfigMap
 metadata:
   name: nginx-conf
 data:
-  nginx.conf: |
-    {{- .Files.Get "files/nginx.conf" | nindent 4 }}
+  {{- with .Values.proxy.config }}
+  nginx.conf:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 {{- end }}
 
