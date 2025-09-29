@@ -101,17 +101,19 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-# This is to setup the liveness and readiness probes more information can be found here:
+# -- to setup the liveness probes more information can be found here:
 # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
-livenessProbe:
-  httpGet:
-    path: /
-    port: http
+livenessProbe: {}
+#   httpGet:
+#     path: /
+#     port: http
 
-readinessProbe:
-  httpGet:
-    path: /
-    port: http
+# -- to setup the readinessProbe more information can be found here:
+# https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+readinessProbe: {}
+#   httpGet:
+#     path: /
+#     port: http
 
 # This section is for setting up autoscaling more information can be found here:
 # https://kubernetes.io/docs/concepts/workloads/autoscaling/
@@ -357,7 +359,7 @@ activity_pub:
 # Options for embedded nginx reverse-proxy
 proxy:
   # -- enable/disable the embedded proxy
-  enabled: true
+  enabled: false
 
   service:
     # -- port exposed by proxy service
