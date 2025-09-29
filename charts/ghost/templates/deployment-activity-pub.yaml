@@ -27,7 +27,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ include "ghost.serviceAccountName" . }}
-      {{- with .Values.podSecurityContext }}
+      {{- with .Values.activity_pub.podSecurityContext }}
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
@@ -78,27 +78,17 @@ spec:
             - name: LOCAL_STORAGE_HOSTING_URL
               value: "{{ .Values.ghost.url }}/content/images/activitypub"
 
-          {{- with .Values.securityContext }}
+          {{- with .Values.activity_pub.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
 
           ports:
             - name: http
-              containerPort: {{ .Values.service.targetPort }}
+              containerPort: {{ .Values.activity_pub.service.targetPort }}
               protocol: TCP
 
-          {{- with .Values.livenessProbe }}
-          livenessProbe:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-
-          {{- with .Values.readinessProbe }}
-          readinessProbe:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-
-          {{- with .Values.resources }}
+          {{- with .Values.activity_pub.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -118,6 +108,7 @@ spec:
             {{- else }}
             claimName: {{ include "ghost.fullname" . }}
             {{- end }}
+
       {{- with .Values.volumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}

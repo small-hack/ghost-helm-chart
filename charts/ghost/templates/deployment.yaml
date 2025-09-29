@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: {{ include "ghost.fullname" . }}
   labels:
+    app.kubernetes.io/component: ghost
     {{- include "ghost.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
@@ -19,7 +20,6 @@ spec:
       {{- end }}
       labels:
         app.kubernetes.io/component: ghost
-        app.kubernetes.io/name: ghost
         {{- include "ghost.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}

@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: {{ include "ghost.fullname" . }}
   labels:
+    app.kubernetes.io/component: ghost
     {{- include "ghost.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}

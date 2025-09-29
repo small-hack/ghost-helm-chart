@@ -47,7 +47,6 @@ podLabels: {}
 podSecurityContext: {}
   # fsGroup: 2000
 
-
 securityContext: {}
   # capabilities:
   #   drop:
@@ -287,3 +286,25 @@ activity_pub:
     port: 8080
     # -- this is the port in the container you want to contact
     targetPort: 8080
+
+  # -- pod resources: requested cpu/mem and limits for cpu/mem
+  resources: {}
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  # -- Configure Pods Security Context
+  # ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+  podSecurityContext: {}
+    # fsGroup: 2000
+
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
