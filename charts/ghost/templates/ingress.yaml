@@ -33,13 +33,14 @@ spec:
         paths:
           {{- if $.Values.activity_pub.enabled }}
           # ActivityPub routes (must come before the catch-all route)
-          - path: /\.ghost/activitypub(/.*)?
+          - path: /\.ghost/activitypub(?/.*)?
             pathType: ImplementationSpecific
             backend:
               service:
                 name: {{ include "ghost.fullname" $ }}-activitypub
                 port:
                   number: {{ $.Values.activity_pub.service.port }}
+
           - path: /\.well-known/webfinger
             pathType: ImplementationSpecific
             backend:
@@ -47,6 +48,7 @@ spec:
                 name: {{ include "ghost.fullname" $ }}-activitypub
                 port:
                   number: {{ $.Values.activity_pub.service.port }}
+
           - path: /\.well-known/nodeinfo
             pathType: ImplementationSpecific
             backend:
@@ -75,13 +77,14 @@ spec:
         paths:
           {{- if $.Values.activity_pub.enabled }}
           # ActivityPub routes (must come before the catch-all route)
-          - path: /\.ghost/activitypub(/.*)?
+          - path: /\.ghost/activitypub(?/.*)?
             pathType: ImplementationSpecific
             backend:
               service:
                 name: {{ include "ghost.fullname" $ }}-activitypub
                 port:
                   number: {{ $.Values.activity_pub.service.port }}
+
           - path: /\.well-known/webfinger
             pathType: ImplementationSpecific
             backend:
@@ -89,6 +92,7 @@ spec:
                 name: {{ include "ghost.fullname" $ }}-activitypub
                 port:
                   number: {{ $.Values.activity_pub.service.port }}
+
           - path: /\.well-known/nodeinfo
             pathType: ImplementationSpecific
             backend:
@@ -97,6 +101,7 @@ spec:
                 port:
                   number: {{ $.Values.activity_pub.service.port }}
           {{- end }}
+
           - path: /
             pathType: Prefix
             backend:
