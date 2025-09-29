@@ -1,6 +1,6 @@
 # ghost
 
-![Version: 2.0.1](https://img.shields.io/badge/Version-2.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
+![Version: 2.0.2](https://img.shields.io/badge/Version-2.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
 
 A Helm chart for deploying Ghost on Kubernetes
 
@@ -74,6 +74,7 @@ A Helm chart for deploying Ghost on Kubernetes
 | ghost.blog_title | string | `""` | title of your ghost blog |
 | ghost.domain | string | `""` | domain of the ghost blog (must NOT include http:// or https://) e.g. blog.example.com |
 | ghost.enable_https | bool | `false` | enable HTTPS for the ghost blog |
+| ghost.logging_level | string | `"info"` | default logging level for the ghost container |
 | ghost.skip_bootstrap | bool | `false` | skip install of ghost at pod restart |
 | ghost.smtp.existingSecret | string | `""` | existing kubernetes secret with ghost smtp credentials |
 | ghost.smtp.from_address | string | `""` | smtp from address. ignored if existingSecret not "" |

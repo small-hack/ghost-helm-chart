@@ -214,6 +214,9 @@ ghost:
   # -- skip install of ghost at pod restart
   skip_bootstrap: false
 
+  # -- default logging level for the ghost container
+  logging_level: info
+
   # admin user info
   admin:
     # -- admin username. ignored if existingSecret not ""

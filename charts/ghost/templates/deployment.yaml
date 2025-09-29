@@ -64,6 +64,9 @@ spec:
             - name: ADMIN_DOMAIN
               value: {{ .Values.ghost.admin_domain }}
 
+            - name: logging__level
+              value: {{ .Values.ghost.logging_level }}
+
             - name: database__client
               value: mysql
 
