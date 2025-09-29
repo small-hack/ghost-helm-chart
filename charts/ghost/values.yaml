@@ -76,7 +76,7 @@ service:
 # https://kubernetes.io/docs/concepts/services-networking/ingress/
 ingress:
   # -- enable ingress from outside the cluster
-  enabled: false
+  enabled: true
   # -- ingress class name e.g. nginx
   className: ""
   annotations: {}
@@ -86,7 +86,7 @@ ingress:
     - host: chart-example.local
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Path
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
@@ -358,6 +358,10 @@ activity_pub:
 proxy:
   # -- enable/disable the embedded proxy
   enabled: true
+
+  service:
+    # -- port exposed by proxy service
+    port: 80
 
   # -- config to be mounted into the nginx container
   config: |-
