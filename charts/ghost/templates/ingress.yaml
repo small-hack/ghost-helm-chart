@@ -32,6 +32,7 @@ spec:
       http:
         paths:
           {{- if $.Values.activity_pub.enabled }}
+          {{- if not $.Values.proxy.enabled }}
           # ActivityPub routes (must come before the catch-all route)
           - path: /\.ghost/activitypub(?/.*)?
             pathType: ImplementationSpecific
@@ -57,7 +58,7 @@ spec:
                 port:
                   number: {{ $.Values.activity_pub.service.port }}
           {{- end }}
-
+          {{- end }}
           # regular ghost stuff
           {{- range .paths }}
           - path: {{ .path }}
@@ -66,9 +67,15 @@ spec:
             {{- end }}
             backend:
               service:
+                {{- if $.Values.proxy.enabled }}
+                name: {{ include "ghost.fullname" $ }}-proxy
+                port:
+                  number: {{ $.Values.proxy.service.port }}
+                {{- else}}
                 name: {{ include "ghost.fullname" $ }}
                 port:
                   number: {{ $.Values.service.port }}
+                {{- end }}
           {{- end }}
 
     # Admin domain
@@ -76,6 +83,7 @@ spec:
       http:
         paths:
           {{- if $.Values.activity_pub.enabled }}
+          {{- if not $.Values.proxy.enabled }}
           # ActivityPub routes (must come before the catch-all route)
           - path: /\.ghost/activitypub(?/.*)?
             pathType: ImplementationSpecific
@@ -101,13 +109,20 @@ spec:
                 port:
                   number: {{ $.Values.activity_pub.service.port }}
           {{- end }}
+          {{- end }}
 
           - path: /
             pathType: Prefix
             backend:
               service:
+                {{- if $.Values.proxy.enabled }}
+                name: {{ include "ghost.fullname" $ }}-proxy
+                port:
+                  number: {{ $.Values.proxy.service.port }}
+                {{- else}}
                 name: {{ include "ghost.fullname" $ }}
                 port:
                   number: {{ $.Values.service.port }}
+                {{- end }}
     {{- end }}
 {{- end }}

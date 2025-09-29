@@ -1,6 +1,6 @@
 # ghost
 
-![Version: 1.11.1](https://img.shields.io/badge/Version-1.11.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
+![Version: 1.11.2](https://img.shields.io/badge/Version-1.11.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
 
 A Helm chart for deploying Ghost on Kubernetes
 
@@ -95,10 +95,10 @@ A Helm chart for deploying Ghost on Kubernetes
 | imagePullSecrets | list | `[]` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` | ingress class name e.g. nginx |
-| ingress.enabled | bool | `false` | enable ingress from outside the cluster |
+| ingress.enabled | bool | `true` | enable ingress from outside the cluster |
 | ingress.hosts[0].host | string | `"chart-example.local"` |  |
 | ingress.hosts[0].paths[0].path | string | `"/"` |  |
-| ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
+| ingress.hosts[0].paths[0].pathType | string | `"Path"` |  |
 | ingress.tls | list | `[]` |  |
 | livenessProbe.httpGet.path | string | `"/"` |  |
 | livenessProbe.httpGet.port | string | `"http"` |  |
@@ -112,6 +112,7 @@ A Helm chart for deploying Ghost on Kubernetes
 | podSecurityContext | object | `{}` | Configure Pods Security Context ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod |
 | proxy.config | string | `"user nginx;\nworker_processes  1;\nevents {\n  worker_connections  10240;\n}\nhttp {\n  server {\n      listen       80;\n      server_name  0.0.0.0;\n      location / {\n        root   /usr/share/nginx/html; #Change this line\n        index  index.html index.htm;\n    }\n  }\n}"` | config to be mounted into the nginx container |
 | proxy.enabled | bool | `true` | enable/disable the embedded proxy |
+| proxy.service.port | int | `80` | port exposed by proxy service |
 | readinessProbe.httpGet.path | string | `"/"` |  |
 | readinessProbe.httpGet.port | string | `"http"` |  |
 | replicaCount | int | `1` | This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/ |
