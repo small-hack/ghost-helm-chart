@@ -95,8 +95,10 @@ spec:
             - name: ALLOW_PRIVATE_ADDRESS
               value: {{ .Values.activity_pub.allowPrivateAddress | quote }}
 
+            {{- with .Values.activity_pub.skipSignatureVerfication }}
             - name: SKIP_SIGNATURE_VERIFICATION
-              value: {{ .Values.activity_pub.skipSignatureVerfication | quote }}
+              value: {{ . | quote }}
+            {{ end }}
 
             - name: USE_MQ
               value: {{ .Values.activity_pub.useMq | quote }}
