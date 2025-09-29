@@ -33,7 +33,7 @@ spec:
         paths:
           {{- if and $.Values.activity_pub.enabled (not $.Values.proxy.enabled) }}
           # ActivityPub routes (must come before the catch-all route)
-          - path: /\.ghost/activitypub(?/.*)?
+          - path: /\.ghost/activitypub/.*
             pathType: ImplementationSpecific
             backend:
               service:
@@ -82,7 +82,7 @@ spec:
         paths:
           {{- if and $.Values.activity_pub.enabled (not $.Values.proxy.enabled) }}
           # ActivityPub routes (must come before the catch-all route)
-          - path: /\.ghost/activitypub(?/.*)?
+          - path: /\.ghost/activitypub/.*
             pathType: ImplementationSpecific
             backend:
               service:
