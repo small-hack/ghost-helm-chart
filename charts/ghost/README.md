@@ -1,6 +1,6 @@
 # ghost
 
-![Version: 1.6.2](https://img.shields.io/badge/Version-1.6.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
+![Version: 1.7.0](https://img.shields.io/badge/Version-1.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
 
 A Helm chart for deploying Ghost on Kubernetes
 
@@ -30,6 +30,10 @@ A Helm chart for deploying Ghost on Kubernetes
 | activity_pub.externalDatabase.secretKeys.root_password | string | `""` | secret key in existing k8s secret for ActivityPub database root password |
 | activity_pub.externalDatabase.secretKeys.username | string | `""` | secret key in existing k8s secret for ActivityPub database username |
 | activity_pub.externalDatabase.username | string | `""` | database username. ignored if existingSecret not "" |
+| activity_pub.image.pullPolicy | string | `"IfNotPresent"` | This sets the pull policy for ActivityPub images. |
+| activity_pub.image.registry | string | `"ghcr.io"` | ActivityPub image registry |
+| activity_pub.image.repository | string | `"tryghost/activitypub"` | ActivityPub image repo |
+| activity_pub.image.tag | string | `"1.1"` | ActivityPub verison (the image tag) |
 | activity_pub.podSecurityContext | object | `{}` | ActivityPub Configure Pods Security Context ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod |
 | activity_pub.resources | object | `{}` | ActivityPub pod resources: requested cpu/mem and limits for cpu/mem |
 | activity_pub.securityContext | object | `{}` | ActivityPub Configure container Security Context |
@@ -37,7 +41,6 @@ A Helm chart for deploying Ghost on Kubernetes
 | activity_pub.service.targetPort | int | `8080` | port in the ActivityPub container you want to contact |
 | activity_pub.service.type | string | `"ClusterIP"` | sets the ActivityPub service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types |
 | activity_pub.useMq | bool | `false` | use MQ |
-| activity_pub.version | string | `"1.1"` | ActivityPub verison |
 | affinity | object | `{}` | pod or node affinity |
 | autoscaling.enabled | bool | `false` | enable autoscaling |
 | autoscaling.maxReplicas | int | `2` | autoscaling max pod replicas |

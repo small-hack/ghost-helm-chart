@@ -33,7 +33,7 @@ spec:
       {{- end }}
       initContainers:
         - name: activitypub-migrate
-          image: "ghcr.io/tryghost/activitypub-migrations:{{ .Values.activity_pub.version }}"
+          image: "ghcr.io/tryghost/activitypub-migrations:{{ .Values.activity_pub.image.tag }}"
           env:
             - name: MYSQL_DB
               valueFrom:
@@ -47,7 +47,7 @@ spec:
                   {{- end }}
       containers:
         - name: activitypub
-          image: "ghcr.io/tryghost/activitypub:{{ .Values.activity_pub.version }}"
+          image: "{{ .Values.activity_pub.image.registry }}/{{ .Values.activity_pub.image.repository }}:{{ .Values.activity_pub.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
 
           {{- if not .Values.activity_pub.externalDatabase.existingSecret }}
