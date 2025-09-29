@@ -31,8 +31,7 @@ spec:
     - host: {{ .host | quote }}
       http:
         paths:
-          {{- if $.Values.activity_pub.enabled }}
-          {{- if not $.Values.proxy.enabled }}
+          {{- if and $.Values.activity_pub.enabled (not $.Values.proxy.enabled) }}
           # ActivityPub routes (must come before the catch-all route)
           - path: /\.ghost/activitypub(?/.*)?
             pathType: ImplementationSpecific
@@ -57,7 +56,6 @@ spec:
                 name: {{ include "ghost.fullname" $ }}-activitypub
                 port:
                   number: {{ $.Values.activity_pub.service.port }}
-          {{- end }}
           {{- end }}
           # regular ghost stuff
           {{- range .paths }}
@@ -82,8 +80,7 @@ spec:
     - host: {{ $.Values.ghost.admin_domain | quote }}
       http:
         paths:
-          {{- if $.Values.activity_pub.enabled }}
-          {{- if not $.Values.proxy.enabled }}
+          {{- if and $.Values.activity_pub.enabled (not $.Values.proxy.enabled) }}
           # ActivityPub routes (must come before the catch-all route)
           - path: /\.ghost/activitypub(?/.*)?
             pathType: ImplementationSpecific
@@ -108,7 +105,6 @@ spec:
                 name: {{ include "ghost.fullname" $ }}-activitypub
                 port:
                   number: {{ $.Values.activity_pub.service.port }}
-          {{- end }}
           {{- end }}
 
           - path: /

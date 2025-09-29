@@ -27,11 +27,13 @@ spec:
           ports:
             - name: nginx
               containerPort: 80
+
           volumeMounts:
             - name: nginx-conf
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
               readOnly: true
+
           resources:
             requests:
               memory: 100Mi
@@ -40,10 +42,10 @@ spec:
               memory: 256Mi
               cpu: 1000m
       volumes:
-      - name: nginx-conf
-        configMap:
-          name: nginx-conf
-          items:
-            - key: nginx.conf
-              path: nginx.conf
+        - name: nginx-conf
+          configMap:
+            name: nginx-conf
+            items:
+              - key: nginx.conf
+                path: nginx.conf
 {{- end }}
