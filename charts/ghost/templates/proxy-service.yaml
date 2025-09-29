@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "ghost.fullname" . }}-proxy
+  labels:
+    app.kubernetes.io/component: ghost
+    {{- include "ghost.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: nginx
+      targetPort: 80
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "ghost.selectorLabels" . | nindent 4 }}
