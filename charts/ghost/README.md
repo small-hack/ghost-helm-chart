@@ -1,6 +1,6 @@
 # ghost
 
-![Version: 1.6.1](https://img.shields.io/badge/Version-1.6.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
+![Version: 1.6.2](https://img.shields.io/badge/Version-1.6.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.10](https://img.shields.io/badge/AppVersion-6.0.10-informational?style=flat-square)
 
 A Helm chart for deploying Ghost on Kubernetes
 
@@ -30,12 +30,12 @@ A Helm chart for deploying Ghost on Kubernetes
 | activity_pub.externalDatabase.secretKeys.root_password | string | `""` | secret key in existing k8s secret for ActivityPub database root password |
 | activity_pub.externalDatabase.secretKeys.username | string | `""` | secret key in existing k8s secret for ActivityPub database username |
 | activity_pub.externalDatabase.username | string | `""` | database username. ignored if existingSecret not "" |
-| activity_pub.podSecurityContext | object | `{}` | Configure Pods Security Context ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod |
-| activity_pub.resources | object | `{}` | pod resources: requested cpu/mem and limits for cpu/mem |
-| activity_pub.securityContext | object | `{}` |  |
-| activity_pub.service.port | int | `8080` | This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports |
-| activity_pub.service.targetPort | int | `8080` | this is the port in the container you want to contact |
-| activity_pub.service.type | string | `"ClusterIP"` | This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types |
+| activity_pub.podSecurityContext | object | `{}` | ActivityPub Configure Pods Security Context ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod |
+| activity_pub.resources | object | `{}` | ActivityPub pod resources: requested cpu/mem and limits for cpu/mem |
+| activity_pub.securityContext | object | `{}` | ActivityPub Configure container Security Context |
+| activity_pub.service.port | int | `8080` | sets the ActivityPub ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports |
+| activity_pub.service.targetPort | int | `8080` | port in the ActivityPub container you want to contact |
+| activity_pub.service.type | string | `"ClusterIP"` | sets the ActivityPub service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types |
 | activity_pub.useMq | bool | `false` | use MQ |
 | activity_pub.version | string | `"1.1"` | ActivityPub verison |
 | affinity | object | `{}` | pod or node affinity |
@@ -102,8 +102,8 @@ A Helm chart for deploying Ghost on Kubernetes
 | persistence.accessModes | list | `[]` | accessModes for the PVC (ignored if persistence.existingClaim is set) |
 | persistence.existingClaim | string | `""` | use an existing Kubernetes Peristent Volume Claim |
 | persistence.storage | string | `"1Gi"` | size of the PVC (ignored if persistence.existingClaim is set) |
-| podAnnotations | object | `{}` | This is for setting Kubernetes Annotations to a Pod. For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/ |
-| podLabels | object | `{}` | This is for setting Kubernetes Labels to a Pod. For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/ |
+| podAnnotations | object | `{}` | This is for setting Kubernetes Annotations to a Pod. For more info checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/ |
+| podLabels | object | `{}` | This is for setting Kubernetes Labels to a Pod. For more info checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/ |
 | podSecurityContext | object | `{}` | Configure Pods Security Context ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod |
 | readinessProbe.httpGet.path | string | `"/"` |  |
 | readinessProbe.httpGet.port | string | `"http"` |  |
