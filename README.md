@@ -1,3 +1,11 @@
+# ⚠️ Notice of migration
+
+## We are migrating this repo to a self hosted forgejo and mirroring to codeberg. No further work will be done here.
+
+You can find our new repos here:
+- https://git.smallhack.org/small-hack/ghost-helm-chart
+- https://codeberg.org/small-hack/ghost-helm-chart
+
 # Ghost helm chart
 
 <a href="https://github.com/small-hack/ghost-helm-chart/releases"><img src="https://img.shields.io/github/v/release/small-hack/ghost-helm-chart?style=plastic&labelColor=blue&color=green&logo=GitHub&logoColor=white"></a>
