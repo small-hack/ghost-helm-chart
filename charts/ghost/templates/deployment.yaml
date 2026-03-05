@@ -73,6 +73,10 @@ spec:
             - name: ACTIVITYPUB_TARGET
               value: "{{ include "ghost.fullname" . }}-activitypub.{{ .Release.Namespace }}.svc:{{ .Values.activity_pub.service.port }}"
 
+            {{- with .Values.extraEnvVars }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+
             {{- if .Values.externalDatabase.existingSecret }}
             - name: database__connection__host
               valueFrom:
