@@ -47,6 +47,9 @@ podAnnotations: {}
 # https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 podLabels: {}
 
+# -- optional extra env vars for the deployment
+extraEnvVars: []
+
 # -- Configure Pods Security Context
 # ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
 podSecurityContext: {}
